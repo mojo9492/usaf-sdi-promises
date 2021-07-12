@@ -20,73 +20,95 @@ var getGitHubProfileAsync = function (user) {
     };
 
     request.get(options, function (err, res, body) {
-      if(err){
+      if (err) {
         reject(err);
       } else if (body.message) {
-          const errorMsg = new Error('Failed to get GitHub profile: ' + body.message);
-          reject(errorMsg);
+        const errorMsg = new Error('Failed to get GitHub profile: ' + body.message);
+        reject(errorMsg);
       } else {
-        resolve(res);
+        resolve(res.body);
       }
     });
   });
 
   resultPromise
     .then(res => {
-      console.log('RESULT PROMISE RES')
-      console.log(res);
-      resolve(res);
+      return res
     })
     .catch(err => {
-      console.log('RESULT PROMISE ERR')
       console.log(err)
-
-      reject(err)
-    };
-    })
-
-
-//-------------------
-  // {
-  //         if(err) {
-  //           reject(err);
-  //         } else if(body.message) {
-
-  //   } else {
-  //     resolve(body);
-  //   }
-  // }
-
+    });
   return resultPromise;
 };
 
-// var getGitHubProfileAsync; // TODO
-
-
 // (2) Asyncronous token generation
-var generateRandomToken = function (callback) {
-  crypto.randomBytes(20, function (err, buffer) {
-    if (err) { return callback(err, null); }
-    callback(null, buffer.toString('hex'));
-  });
+var generateRandomTokenAsync = function (callback) {
+  const = resultPromise new Promise((resolve, reject) => {
+
+
+  })
+
+  resultPromise
+    .then(res => {
+      return res
+    })
+    .catch(err => {
+      console.log(err)
+    });
+
+
+
+
+
+
+  // crypto.randomBytes(20, function (err, buffer) {
+  //   if (err) { return callback(err, null); }
+  //   callback(null, buffer.toString('hex'));
+  // });
+
+  return resultPromise
 };
-
-var generateRandomTokenAsync; // TODO
-
 
 // (3) Asyncronous file manipulation
 var readFileAndMakeItFunny = function (filePath, callback) {
-  fs.readFile(filePath, 'utf8', function (err, file) {
-    if (err) { return callback(err); }
 
-    var funnyFile = file.split('\n')
-      .map(function (line) {
-        return line + ' lol';
+  const resultPromise = new Promise((resolve, reject) => {
+    if (typeof filePath === 'string') {
+      fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+          reject(err);
+        } else {
+          var funnyFile = data.split('\n')
+            .map(line => line + ' lol')
+            .join('\n');
+          resolve(funnyFile)
+        }
       })
-      .join('\n');
-
-    callback(funnyFile);
+    }
   });
+
+
+  resultPromise
+    .then(res => {
+      return res
+    })
+    .catch(err => {
+      console.log(err)
+    });
+
+  // fs.readFile(filePath, 'utf8', function (err, file) {
+  //   if (err) { return callback(err); }
+
+  //   var funnyFile = file.split('\n')
+  //     .map(function (line) {
+  //       return line + ' lol';
+  //     })
+  //     .join('\n');
+
+  //   callback(funnyFile);
+  // });
+
+  return resultPromise;
 };
 
 var readFileAndMakeItFunnyAsync; // TODO
