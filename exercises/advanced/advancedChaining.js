@@ -17,7 +17,7 @@
 var Promise = require('bluebird');
 var lib = require('../../lib/advancedChainingLib');
 
-const { getGitHubProfile, getIntersection } = lib;
+const { getGitHubProfile, getIntersection, predictImage } = lib;
 // We're using Clarifai's API to recognize concepts in an image into a list of concepts
 // Visit the following url to sign up for a free account
 //     https://developer.clarifai.com/login/
@@ -39,11 +39,26 @@ var searchCommonConceptsFromGitHubProfiles = function (githubHandles) {
   }
 
   return Promise.all(promiseArray)
-  .then(arrayOfValues => {
-    console.log('values ', arrayOfValues)
+    .then(arrayOfValues => {
+      console.log('values ', arrayOfValues)
+      //isolate urls into array
+      const urlArray = [];
+      for (obj of arrayOfValues) {
+        urlArray.push(obj.avatarUrl);
+      }
 
-    getIntersection(arrayOfValues)
-  })
+      return urlArray;
+    })
+    //then for loop array through predictImage()
+    .then(urlArray => {
+      urlArray.map(url => {
+        console.log('single url', url)
+        predictImage(url)
+      })
+    })
+    .then(arrayOfArrays => console.log('tags'))
+
+  //then run result thru getIntersections();
 
 };
 
