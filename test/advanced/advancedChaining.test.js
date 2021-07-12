@@ -19,7 +19,7 @@ describe('Advanced chaining', function() {
 
     it('should resolve to an array of tags', function(done) {
       this.timeout(5000);
-      searchCommonConceptsFromGitHubProfiles(['danthareja'])
+      searchCommonConceptsFromGitHubProfiles(['danthareja', 'beth'])
         .then(function(tags) {
           expect(tags).to.be.an.instanceOf(Array);
           done();

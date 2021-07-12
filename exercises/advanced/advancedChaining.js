@@ -56,7 +56,18 @@ var searchCommonConceptsFromGitHubProfiles = function (githubHandles) {
         predictImage(url)
       })
     })
-    .then(arrayOfArrays => console.log('tags'))
+    //UNDEFINED!!!!!!! we already got dat lol yup
+  // i think we used predict image wrong
+  //we need to use the api key i htink
+  //yeah, we never used it, and the
+  //yeah
+// the api request isn't fufilled
+//wanna ask a q?
+// i odontsee where to add the api key
+//dont see it either
+//hopping in discord, gonna bounce at 6 if we dont figure it out
+//
+    .then(arrayOfArrays => console.log('tags' + arrayOfArrays))
 
   //then run result thru getIntersections();
 
