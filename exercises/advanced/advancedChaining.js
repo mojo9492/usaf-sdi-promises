@@ -66,7 +66,10 @@ var searchCommonConceptsFromGitHubProfiles = function (githubHandles) {
 // i odontsee where to add the api key
 //dont see it either
 //hopping in discord, gonna bounce at 6 if we dont figure it out
-//
+
+//can you put the url here?
+
+
     .then(arrayOfArrays => console.log('tags' + arrayOfArrays))
 
   //then run result thru getIntersections();
