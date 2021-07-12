@@ -5,6 +5,7 @@
  */
 
 var fs = require('fs');
+// const https = require('https');
 var request = require('request');
 var Promise = require('bluebird');
 
@@ -22,8 +23,10 @@ var pluckFirstLineFromFileAsync = function (filePath) {
             if (humanData[i] === '\n') {
               break
             }
+
             result += humanData[i];
           }
+
           resolve(result);
         }
       });
@@ -35,8 +38,20 @@ var pluckFirstLineFromFileAsync = function (filePath) {
 
 // This function should retrieve the status code of a GET request to `url`
 var getStatusCodeAsync = function (url) {
-  // TODO
-};
+  const resultPromise = new Promise((resolve, reject) => {
+    if (typeof url === 'string') {
+      request(url, (err, res, body) => {
+        if (err) {
+          reject(err);
+        }
+        if (res) {
+          resolve(res.statusCode)
+        }
+      })
+    };
+  });
+  return resultPromise;
+}
 
 // Export these functions so we can test them and reuse them in later exercises
 module.exports = {
