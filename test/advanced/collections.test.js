@@ -34,6 +34,7 @@ describe('Collections', function() {
     it('should write the first lines of each file to the output file', function(done) {
       combine(filesToRead, fileToWriteTo)
         .then(function() {
+          console.log('this', fileToWriteTo);
           // If a promise is returned,
           // The file should be successfully written
           // before this block is run

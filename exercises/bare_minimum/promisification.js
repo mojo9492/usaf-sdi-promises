@@ -43,8 +43,14 @@ var getGitHubProfileAsync = function (user) {
 
 // (2) Asyncronous token generation
 var generateRandomTokenAsync = function (callback) {
-  const = resultPromise new Promise((resolve, reject) => {
-
+  const resultPromise = new Promise((resolve, reject) => {
+    crypto.randomBytes(20, function (err, buffer) {
+      if (err) {
+        reject (err);
+      } else {
+        resolve(buffer.toString('hex'));
+      }
+    });
 
   })
 
@@ -70,7 +76,7 @@ var generateRandomTokenAsync = function (callback) {
 };
 
 // (3) Asyncronous file manipulation
-var readFileAndMakeItFunny = function (filePath, callback) {
+var readFileAndMakeItFunnyAsync = function (filePath, callback) {
 
   const resultPromise = new Promise((resolve, reject) => {
     if (typeof filePath === 'string') {
@@ -86,7 +92,6 @@ var readFileAndMakeItFunny = function (filePath, callback) {
       })
     }
   });
-
 
   resultPromise
     .then(res => {
