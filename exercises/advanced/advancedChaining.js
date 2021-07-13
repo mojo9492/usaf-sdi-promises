@@ -40,38 +40,21 @@ var searchCommonConceptsFromGitHubProfiles = function (githubHandles) {
 
   return Promise.all(promiseArray)
     .then(arrayOfValues => {
-      console.log('values ', arrayOfValues)
       //isolate urls into array
       const urlArray = [];
       for (obj of arrayOfValues) {
         urlArray.push(obj.avatarUrl);
       }
-
-      return urlArray;
+      //push promises into another array
+      const newPromiseArray = [];
+      for (url of urlArray) {
+        newPromiseArray.push(predictImage(url));
+      };
+      //return new promise.all
+      return Promise.all(newPromiseArray)
     })
     //then for loop array through predictImage()
-    .then(urlArray => {
-      urlArray.map(url => {
-        console.log('single url', url)
-        predictImage(url)
-      })
-    })
-    //UNDEFINED!!!!!!! we already got dat lol yup
-  // i think we used predict image wrong
-  //we need to use the api key i htink
-  //yeah, we never used it, and the
-  //yeah
-// the api request isn't fufilled
-//wanna ask a q?
-// i odontsee where to add the api key
-//dont see it either
-//hopping in discord, gonna bounce at 6 if we dont figure it out
-
-//can you put the url here?
-
-
-    .then(arrayOfArrays => console.log('tags' + arrayOfArrays))
-
+    .then(tags => getIntersection(tags));
   //then run result thru getIntersections();
 
 };
